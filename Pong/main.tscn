@@ -1,0 +1,145 @@
+[gd_scene load_steps=14 format=3 uid="uid://b821myv7hqira"]
+
+[ext_resource type="Script" uid="uid://c0c5l4qiq12ef" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bnioct7k1008b" path="res://players.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://de78u6sepvyir" path="res://ball.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://3qfrgy783sp2" path="res://computer_brain.tscn" id="3_272bh"]
+[ext_resource type="PackedScene" uid="uid://opwt8f7pgv48" path="res://gui.tscn" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://7ermecsvwtm3" path="res://Art/Sounds/Retro Success Melody 01 - distorted synth 1.wav" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dnvqde1pd2kbx" path="res://straight_wall.tscn" id="4_kek77"]
+[ext_resource type="PackedScene" uid="uid://drdxj43ltbqg6" path="res://double_walls.tscn" id="5_4c57u"]
+[ext_resource type="AudioStream" uid="uid://dh7m4xrj5xl01" path="res://Art/Sounds/Retro Success Melody 09 - distorted synth 1.wav" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://ctjak260sjhwh" path="res://break_out.tscn" id="6_4c57u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(640, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(8, 336)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(8, 336)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+ball_scene = ExtResource("2_0xm2m")
+brain_scene = ExtResource("3_272bh")
+straight_wall = ExtResource("4_kek77")
+double_walls = ExtResource("5_4c57u")
+break_out = ExtResource("6_4c57u")
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Arena"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="UpperBoundary" type="StaticBody2D" parent="Arena"]
+position = Vector2(0, 24)
+collision_layer = 3
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Arena/UpperBoundary"]
+offset_right = 640.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/UpperBoundary"]
+position = Vector2(320, 4)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="LowerBoundary" type="StaticBody2D" parent="Arena"]
+position = Vector2(0, 352)
+collision_layer = 3
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Arena/LowerBoundary"]
+offset_right = 640.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/LowerBoundary"]
+position = Vector2(320, 4)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="goalPlayerOne" type="Area2D" parent="Arena"]
+position = Vector2(-3, 193)
+collision_layer = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/goalPlayerOne"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="goalPlayerTwo" type="Area2D" parent="Arena"]
+position = Vector2(643, 192)
+collision_layer = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/goalPlayerTwo"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="MiddleLine" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Arena/MiddleLine"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 32.0
+offset_right = 324.0
+offset_bottom = 352.0
+color = Color(1, 1, 1, 0.654902)
+
+[node name="Players" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="Players"]
+process_mode = 3
+stream = ExtResource("4_7mycd")
+
+[node name="WinSound" type="AudioStreamPlayer" parent="Players"]
+process_mode = 3
+stream = ExtResource("5_272bh")
+
+[node name="GUI" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DelayTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 3.0
+one_shot = true
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ObstacleEndTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="Arena/goalPlayerOne" to="." method="_on_goal_player_one_body_entered"]
+[connection signal="body_entered" from="Arena/goalPlayerTwo" to="." method="_on_goal_player_two_body_entered"]
+[connection signal="cancel" from="GUI" to="." method="_on_gui_cancel"]
+[connection signal="easy" from="GUI" to="." method="_on_gui_easy"]
+[connection signal="hard" from="GUI" to="." method="_on_gui_hard"]
+[connection signal="medium" from="GUI" to="." method="_on_gui_medium"]
+[connection signal="oneplayer" from="GUI" to="." method="_on_gui_oneplayer"]
+[connection signal="quit" from="GUI" to="." method="_on_gui_quit"]
+[connection signal="restart" from="GUI" to="." method="_on_gui_restart"]
+[connection signal="resume" from="GUI" to="." method="_on_gui_resume"]
+[connection signal="start_game" from="GUI" to="." method="_on_gui_start_game"]
+[connection signal="twoplayers" from="GUI" to="." method="_on_gui_twoplayers"]
+[connection signal="win_condition_3" from="GUI" to="." method="_on_gui_win_condition_3"]
+[connection signal="win_condition_5" from="GUI" to="." method="_on_gui_win_condition_5"]
+[connection signal="win_condition_7" from="GUI" to="." method="_on_gui_win_condition_7"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_obstacle_spawn_timer_timeout"]
+[connection signal="timeout" from="ObstacleEndTimer" to="." method="_on_obstacle_end_timer_timeout"]

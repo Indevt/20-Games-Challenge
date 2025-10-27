@@ -1,0 +1,167 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctjak260sjhwh"]
+
+[ext_resource type="Script" uid="uid://000g7mpyr2m3" path="res://break_out.gd" id="1_65qg6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65qg6"]
+size = Vector2(8, 48)
+
+[node name="BreakOut" type="Node2D"]
+
+[node name="BreakoutWall" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(336, 192)
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall2" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(336, 248)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall2"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall2"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall3" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(336, 304)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall3"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall3"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall4" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(336, 136)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall4"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall4"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall5" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(336, 80)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall5"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall5"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall6" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(296, 192)
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall6"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall6"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall7" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(296, 248)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall7"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall7"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall8" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(296, 304)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall8"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall8"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall9" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(296, 136)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall9"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall9"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[node name="BreakoutWall10" type="RigidBody2D" parent="." groups=["Break_Out"]]
+position = Vector2(296, 80)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_65qg6")
+
+[node name="ColorRect" type="ColorRect" parent="BreakoutWall10"]
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakoutWall10"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_65qg6")
+
+[connection signal="body_entered" from="BreakoutWall" to="BreakoutWall" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall2" to="BreakoutWall2" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall3" to="BreakoutWall3" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall4" to="BreakoutWall4" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall5" to="BreakoutWall5" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall6" to="BreakoutWall6" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall7" to="BreakoutWall7" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall8" to="BreakoutWall8" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall9" to="BreakoutWall9" method="_on_body_entered"]
+[connection signal="body_entered" from="BreakoutWall10" to="BreakoutWall10" method="_on_body_entered"]

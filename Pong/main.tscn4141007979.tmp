@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://b821myv7hqira"]
+
+[ext_resource type="Script" uid="uid://c0c5l4qiq12ef" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bnioct7k1008b" path="res://players.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://de78u6sepvyir" path="res://ball.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://opwt8f7pgv48" path="res://gui.tscn" id="4_1bvp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(640, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(8, 336)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(8, 336)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+ball_scene = ExtResource("2_0xm2m")
+
+[node name="Arena" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Arena"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="UpperBoundary" type="StaticBody2D" parent="Arena"]
+position = Vector2(0, 24)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Arena/UpperBoundary"]
+offset_right = 640.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/UpperBoundary"]
+position = Vector2(320, 4)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="LowerBoundary" type="StaticBody2D" parent="Arena"]
+position = Vector2(0, 352)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Arena/LowerBoundary"]
+offset_right = 640.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/LowerBoundary"]
+position = Vector2(320, 4)
+shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="goalPlayerOne" type="Area2D" parent="Arena"]
+position = Vector2(-3, 193)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/goalPlayerOne"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="goalPlayerTwo" type="Area2D" parent="Arena"]
+position = Vector2(643, 192)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena/goalPlayerTwo"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="MiddleLine" type="Control" parent="Arena"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Arena/MiddleLine"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 32.0
+offset_right = 324.0
+offset_bottom = 352.0
+
+[node name="Players" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="GUI" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="Arena/goalPlayerOne" to="." method="_on_goal_player_one_body_entered"]
+[connection signal="body_entered" from="Arena/goalPlayerTwo" to="." method="_on_goal_player_two_body_entered"]
+[connection signal="start_game" from="GUI" to="." method="_on_gui_start_game"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]

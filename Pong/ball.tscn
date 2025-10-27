@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://de78u6sepvyir"]
+
+[ext_resource type="Script" uid="uid://cjau8psnsg63b" path="res://ball.gd" id="1_x8fbi"]
+[ext_resource type="AudioStream" uid="uid://n2es14rxnfes" path="res://Art/Sounds/Retro Jump Classic 04.wav" id="2_41u45"]
+[ext_resource type="Script" uid="uid://biqbet8p5ocj8" path="res://trail.gd" id="2_ktgx5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbx31"]
+size = Vector2(8, 8)
+
+[sub_resource type="Curve" id="Curve_ktgx5"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ktgx5"]
+
+[node name="Ball" type="RigidBody2D"]
+position = Vector2(320, 160)
+collision_mask = 9
+gravity_scale = 0.0
+script = ExtResource("1_x8fbi")
+speed = 5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cbx31")
+
+[node name="Trail" type="Line2D" parent="."]
+width_curve = SubResource("Curve_ktgx5")
+gradient = SubResource("Gradient_ktgx5")
+script = ExtResource("2_ktgx5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_41u45")
+volume_db = -10.0

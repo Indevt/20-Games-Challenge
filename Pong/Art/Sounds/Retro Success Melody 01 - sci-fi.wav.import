@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drxujih16uoxh"
+path="res://.godot/imported/Retro Success Melody 01 - sci-fi.wav-b3c4e4cbbe460f2163548324c5667a78.sample"
+
+[deps]
+
+source_file="res://Art/Sounds/Retro Success Melody 01 - sci-fi.wav"
+dest_files=["res://.godot/imported/Retro Success Melody 01 - sci-fi.wav-b3c4e4cbbe460f2163548324c5667a78.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
