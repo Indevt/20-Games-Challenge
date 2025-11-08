@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://dgdej36otecoq"]
+
+[ext_resource type="Script" uid="uid://b0aokeoth67dj" path="res://flying_obstacles.gd" id="1_yyg63"]
+[ext_resource type="Texture2D" uid="uid://c1ordrmt5sicb" path="res://Art/Sprites/obstacles/Dragon/GoblinRocketRide_Dragon_scaled1.png" id="2_yyg63"]
+[ext_resource type="Texture2D" uid="uid://cw8ekrre7o7m4" path="res://Art/Sprites/obstacles/Dragon/GoblinRocketRide_Dragon_scaled2.png" id="3_h0qad"]
+[ext_resource type="Texture2D" uid="uid://bcrytgigtkts3" path="res://Art/Sprites/obstacles/Dragon/GoblinRocketRide_Dragon_scaled3.png" id="4_eebuw"]
+[ext_resource type="Texture2D" uid="uid://cn3ob1xqv4qnh" path="res://Art/Sprites/obstacles/Dragon/GoblinRocketRide_Dragon_scaled4.png" id="5_jxfbr"]
+[ext_resource type="Texture2D" uid="uid://qcj6suw2wlue" path="res://Art/Sprites/obstacles/Dragon/GoblinRocketRide_Dragon_scaled6.png" id="6_uqejn"]
+[ext_resource type="Texture2D" uid="uid://cn376tpxtwj7s" path="res://Art/Sprites/obstacles/Ship/GoblinRocketRide_Ship_scaled1.png" id="7_uqejn"]
+[ext_resource type="Texture2D" uid="uid://duouhssahflvm" path="res://Art/Sprites/obstacles/Ship/GoblinRocketRide_Ship_scaled2.png" id="8_31710"]
+[ext_resource type="Texture2D" uid="uid://d68vqolnwepp" path="res://Art/Sprites/obstacles/Ship/GoblinRocketRide_Ship_scaled3.png" id="9_5yl7x"]
+[ext_resource type="Texture2D" uid="uid://dp164wlab7p7c" path="res://Art/Sprites/obstacles/Ship/GoblinRocketRide_Ship_scaled4.png" id="10_sou0l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31710"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yyg63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h0qad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eebuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jxfbr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uqejn")
+}],
+"loop": true,
+"name": &"Dragon",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_uqejn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_31710")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5yl7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sou0l")
+}],
+"loop": true,
+"name": &"Ship",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dolb4"]
+size = Vector2(128, 80)
+
+[node name="Flying" type="Area2D"]
+position = Vector2(480, 480)
+script = ExtResource("1_yyg63")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(72, -48)
+sprite_frames = SubResource("SpriteFrames_31710")
+animation = &"Ship"
+frame_progress = 0.78051764
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(72, -48)
+shape = SubResource("RectangleShape2D_dolb4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8, -8)
+rect = Rect2(-16, 0, 144, 8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

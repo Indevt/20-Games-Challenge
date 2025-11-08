@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://07cuq1xrg50b"]
+
+[ext_resource type="Script" uid="uid://dv11m4qgn3dan" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="FontFile" uid="uid://ceudtvsdti27h" path="res://Art/Fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf" id="2_7vrkn"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -116.0
+offset_right = 146.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_font_sizes/font_size = 32
+text = "Goblin Rocket Ride"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 160.0
+offset_right = 397.0
+offset_bottom = 183.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_7vrkn")
+text = "Highscore : 0"
+
+[node name="StartGame" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 28.0
+offset_right = 83.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_7vrkn")
+text = "Press \"Enter\" to start"

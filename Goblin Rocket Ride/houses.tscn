@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c85gjukwtxri3"]
+
+[ext_resource type="Script" uid="uid://yo2mgv1rmfh2" path="res://obstacle.gd" id="1_0x7wa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b88dt"]
+size = Vector2(144, 96)
+
+[node name="Houses" type="Area2D"]
+position = Vector2(512, 480)
+collision_mask = 0
+script = ExtResource("1_0x7wa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(72, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(72, -48)
+shape = SubResource("RectangleShape2D_b88dt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8, -8)
+rect = Rect2(-24, 0, 160, 8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

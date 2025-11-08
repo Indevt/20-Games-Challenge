@@ -1,0 +1,192 @@
+[gd_scene load_steps=24 format=4 uid="uid://ku6fimi5661m"]
+
+[ext_resource type="Script" uid="uid://cyyu5ru71c2jo" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bh0ie6nnocurx" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://d14vgx0q6g3ae" path="res://Art/Sprites/background/GoblinRocketRide_background_scaled.png" id="2_efxa6"]
+[ext_resource type="Script" uid="uid://m5dthj4xq68x" path="res://floor.gd" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://b3a7m3twvkkl0" path="res://obstacle_pool.gd" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bndasgyixwo1f" path="res://Art/Tiles/GoblinRocket Ride_Tilemap_scaled.png" id="4_efxa6"]
+[ext_resource type="PackedScene" uid="uid://c85gjukwtxri3" path="res://houses.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dgdej36otecoq" path="res://flying.tscn" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://1sjb2bt8d2q8" path="res://ui.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://bduw4akidxh4i" path="res://cannonball.tscn" id="9_dg77c"]
+[ext_resource type="PackedScene" uid="uid://07cuq1xrg50b" path="res://main_menu.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dxk2in40e1vit" path="res://game_over_screen.tscn" id="11_efxa6"]
+[ext_resource type="AudioStream" uid="uid://b80txs4w4arvh" path="res://Art/Sounds/Retro Explosion Short 01.wav" id="13_ycdy4"]
+[ext_resource type="AudioStream" uid="uid://33v4ll7mhvfu" path="res://Art/Sounds/Retro Impact Ball 01.wav" id="14_w48qg"]
+[ext_resource type="Script" uid="uid://dm5mbsvvr27j5" path="res://shake_effect.gd" id="15_vivmo"]
+[ext_resource type="AudioStream" uid="uid://cwkjpmmrdfxkq" path="res://Art/Music/GoblinRocketRideTitle.wav" id="16_2cqfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(640, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dg77c"]
+texture = ExtResource("4_efxa6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_efxa6"]
+sources/1 = SubResource("TileSetAtlasSource_dg77c")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(336, 48)
+
+[sub_resource type="Gradient" id="Gradient_w48qg"]
+colors = PackedColorArray(0.98039216, 0.41568628, 0.039215688, 1, 1, 0.9882353, 0.2509804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vivmo"]
+gradient = SubResource("Gradient_w48qg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dg77c"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 376.47
+initial_velocity_max = 611.76
+gravity = Vector3(0, 98, 0)
+scale_min = 3.0
+scale_max = 3.0
+color = Color(1, 0.9882353, 0.2509804, 1)
+color_initial_ramp = SubResource("GradientTexture1D_vivmo")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="World"]
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-100, 0)
+repeat_times = 2
+
+[node name="Background" type="Sprite2D" parent="World/Parallax2D"]
+position = Vector2(320, 180)
+scale = Vector2(0.99999994, 1)
+texture = ExtResource("2_efxa6")
+
+[node name="Ceiling" type="StaticBody2D" parent="World"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ceiling"]
+position = Vector2(320, -4)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Floor" type="Node2D" parent="World"]
+script = ExtResource("3_7mycd")
+
+[node name="FloorSegmentOne" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(320, 360)
+collision_mask = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/Floor/FloorSegmentOne"]
+tile_map_data = PackedByteArray("AAD9//3/AQAAAAAAAAD9//7/AQAAAAEAAAD9////AQAAAAIAAAD+//3/AQABAAAAAAD+//7/AQABAAEAAAD+////AQABAAIAAAD///3/AQACAAAAAAD///7/AQACAAEAAAD/////AQACAAIAAAD6//3/AQAAAAAAAAD6//7/AQAAAAEAAAD6////AQAAAAIAAAD7//3/AQABAAAAAAD7//7/AQABAAEAAAD7////AQABAAIAAAD8//3/AQACAAAAAAD8//7/AQACAAEAAAD8////AQACAAIAAAD3//3/AQAAAAAAAAD3//7/AQAAAAEAAAD3////AQAAAAIAAAD4//3/AQABAAAAAAD4//7/AQABAAEAAAD4////AQABAAIAAAD5//3/AQACAAAAAAD5//7/AQACAAEAAAD5////AQACAAIAAAD0//3/AQAAAAAAAAD0//7/AQAAAAEAAAD0////AQAAAAIAAAD1//3/AQABAAAAAAD1//7/AQABAAEAAAD1////AQABAAIAAAD2//3/AQACAAAAAAD2//7/AQACAAEAAAD2////AQACAAIAAADx//3/AQAAAAAAAADx//7/AQAAAAEAAADx////AQAAAAIAAADy//3/AQABAAAAAADy//7/AQABAAEAAADy////AQABAAIAAADz//3/AQACAAAAAADz//7/AQACAAEAAADz////AQACAAIAAADu//3/AQAAAAAAAADu//7/AQAAAAEAAADu////AQAAAAIAAADv//3/AQABAAAAAADv//7/AQABAAEAAADv////AQABAAIAAADw//3/AQACAAAAAADw//7/AQACAAEAAADw////AQACAAIAAADr//3/AQAAAAAAAADr//7/AQAAAAEAAADr////AQAAAAIAAADs//3/AQABAAAAAADs//7/AQABAAEAAADs////AQABAAIAAADt//3/AQACAAAAAADt//7/AQACAAEAAADt////AQACAAIAAAA=")
+tile_set = SubResource("TileSet_efxa6")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne"]
+position = Vector2(-168, -24)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="FloorSegmentOne2" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(656, 360)
+collision_mask = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/Floor/FloorSegmentOne2"]
+tile_map_data = PackedByteArray("AAD9//3/AQAAAAAAAAD9//7/AQAAAAEAAAD9////AQAAAAIAAAD+//3/AQABAAAAAAD+//7/AQABAAEAAAD+////AQABAAIAAAD///3/AQACAAAAAAD///7/AQACAAEAAAD/////AQACAAIAAAD6//3/AQAAAAAAAAD6//7/AQAAAAEAAAD6////AQAAAAIAAAD7//3/AQABAAAAAAD7//7/AQABAAEAAAD7////AQABAAIAAAD8//3/AQACAAAAAAD8//7/AQACAAEAAAD8////AQACAAIAAAD3//3/AQAAAAAAAAD3//7/AQAAAAEAAAD3////AQAAAAIAAAD4//3/AQABAAAAAAD4//7/AQABAAEAAAD4////AQABAAIAAAD5//3/AQACAAAAAAD5//7/AQACAAEAAAD5////AQACAAIAAAD0//3/AQAAAAAAAAD0//7/AQAAAAEAAAD0////AQAAAAIAAAD1//3/AQABAAAAAAD1//7/AQABAAEAAAD1////AQABAAIAAAD2//3/AQACAAAAAAD2//7/AQACAAEAAAD2////AQACAAIAAADx//3/AQAAAAAAAADx//7/AQAAAAEAAADx////AQAAAAIAAADy//3/AQABAAAAAADy//7/AQABAAEAAADy////AQABAAIAAADz//3/AQACAAAAAADz//7/AQACAAEAAADz////AQACAAIAAADu//3/AQAAAAAAAADu//7/AQAAAAEAAADu////AQAAAAIAAADv//3/AQABAAAAAADv//7/AQABAAEAAADv////AQABAAIAAADw//3/AQACAAAAAADw//7/AQACAAEAAADw////AQACAAIAAADr//3/AQAAAAAAAADr//7/AQAAAAEAAADr////AQAAAAIAAADs//3/AQABAAAAAADs//7/AQABAAEAAADs////AQABAAIAAADt//3/AQACAAAAAADt//7/AQACAAEAAADt////AQACAAIAAAA=")
+tile_set = SubResource("TileSet_efxa6")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne2"]
+position = Vector2(-168, -24)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="FloorSegmentOne3" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(992, 360)
+collision_mask = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/Floor/FloorSegmentOne3"]
+tile_map_data = PackedByteArray("AAD9//3/AQAAAAAAAAD9//7/AQAAAAEAAAD9////AQAAAAIAAAD+//3/AQABAAAAAAD+//7/AQABAAEAAAD+////AQABAAIAAAD///3/AQACAAAAAAD///7/AQACAAEAAAD/////AQACAAIAAAD6//3/AQAAAAAAAAD6//7/AQAAAAEAAAD6////AQAAAAIAAAD7//3/AQABAAAAAAD7//7/AQABAAEAAAD7////AQABAAIAAAD8//3/AQACAAAAAAD8//7/AQACAAEAAAD8////AQACAAIAAAD3//3/AQAAAAAAAAD3//7/AQAAAAEAAAD3////AQAAAAIAAAD4//3/AQABAAAAAAD4//7/AQABAAEAAAD4////AQABAAIAAAD5//3/AQACAAAAAAD5//7/AQACAAEAAAD5////AQACAAIAAAD0//3/AQAAAAAAAAD0//7/AQAAAAEAAAD0////AQAAAAIAAAD1//3/AQABAAAAAAD1//7/AQABAAEAAAD1////AQABAAIAAAD2//3/AQACAAAAAAD2//7/AQACAAEAAAD2////AQACAAIAAADx//3/AQAAAAAAAADx//7/AQAAAAEAAADx////AQAAAAIAAADy//3/AQABAAAAAADy//7/AQABAAEAAADy////AQABAAIAAADz//3/AQACAAAAAADz//7/AQACAAEAAADz////AQACAAIAAADu//3/AQAAAAAAAADu//7/AQAAAAEAAADu////AQAAAAIAAADv//3/AQABAAAAAADv//7/AQABAAEAAADv////AQABAAIAAADw//3/AQACAAAAAADw//7/AQACAAEAAADw////AQACAAIAAADr//3/AQAAAAAAAADr//7/AQAAAAEAAADr////AQAAAAIAAADs//3/AQABAAAAAADs//7/AQABAAEAAADs////AQABAAIAAADt//3/AQACAAAAAADt//7/AQACAAEAAADt////AQACAAIAAAA=")
+tile_set = SubResource("TileSet_efxa6")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne3"]
+position = Vector2(-168, -24)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="ObstaclePool" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
+houses_scene = ExtResource("5_lquwl")
+flying_scene = ExtResource("7_5vw27")
+cannon_scene = ExtResource("9_dg77c")
+
+[node name="GroundSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(640, 312)
+
+[node name="AirSpawnPositionOne" type="Marker2D" parent="."]
+position = Vector2(640, 192)
+
+[node name="AirSpawnPositionTwo" type="Marker2D" parent="."]
+position = Vector2(640, 104)
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+
+[node name="CannonTimer" type="Timer" parent="."]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="EndTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="UI" parent="." instance=ExtResource("7_272bh")]
+
+[node name="MainMenu" parent="." instance=ExtResource("10_4c57u")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="GameOverScreen" parent="." instance=ExtResource("11_efxa6")]
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+process_mode = 3
+emitting = false
+amount = 200
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_dg77c")
+
+[node name="SoundsAndMusic" type="Node" parent="."]
+
+[node name="Explosion" type="AudioStreamPlayer" parent="SoundsAndMusic"]
+stream = ExtResource("13_ycdy4")
+
+[node name="CannonShot" type="AudioStreamPlayer" parent="SoundsAndMusic"]
+stream = ExtResource("14_w48qg")
+volume_db = -10.0
+
+[node name="ShakeEffect" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("15_vivmo")
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_2cqfq")
+
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_obstacle_spawn_timer_timeout"]
+[connection signal="timeout" from="CannonTimer" to="." method="_on_cannon_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]

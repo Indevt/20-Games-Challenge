@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://1sjb2bt8d2q8"]
+
+[ext_resource type="Script" uid="uid://3f1gn0xb7mn6" path="res://ui.gd" id="1_fyqef"]
+[ext_resource type="FontFile" uid="uid://ceudtvsdti27h" path="res://Art/Fonts/ClimateCrisis-Regular-VariableFont_YEAR.ttf" id="2_m6e0p"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fyqef")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 24.0
+offset_right = 626.0
+offset_bottom = 47.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_m6e0p")
+text = "Score: 0"
+
+[node name="Highscore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_right = 625.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_m6e0p")
+text = "Highscore: 0"

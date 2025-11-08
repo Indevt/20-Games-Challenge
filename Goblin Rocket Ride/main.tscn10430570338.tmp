@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://ku6fimi5661m"]
+
+[ext_resource type="Script" uid="uid://cyyu5ru71c2jo" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dfxxqf16tonr5" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bh0ie6nnocurx" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://m5dthj4xq68x" path="res://floor.gd" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://b3a7m3twvkkl0" path="res://obstacle_pool.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c85gjukwtxri3" path="res://houses.tscn" id="5_lquwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(640, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(320, 24)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h2yge")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="World"]
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-300, 0)
+repeat_times = 2
+
+[node name="Background" type="Sprite2D" parent="World/Parallax2D"]
+position = Vector2(320.00003, 180)
+scale = Vector2(5, 2.8124995)
+texture = ExtResource("1_ig7tw")
+
+[node name="Ceiling" type="StaticBody2D" parent="World"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ceiling"]
+position = Vector2(320, -8)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Floor" type="Node2D" parent="World"]
+script = ExtResource("3_7mycd")
+
+[node name="FloorSegmentOne" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(320, 360)
+collision_mask = 0
+
+[node name="SegmentOne" type="Sprite2D" parent="World/Floor/FloorSegmentOne"]
+position = Vector2(-160.00003, -12.000016)
+scale = Vector2(2.5, 0.1874998)
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne"]
+position = Vector2(-160, -12)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="FloorSegmentOne2" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(640, 360)
+collision_mask = 0
+
+[node name="SegmentOne" type="Sprite2D" parent="World/Floor/FloorSegmentOne2"]
+position = Vector2(-160.00003, -12.000016)
+scale = Vector2(2.5, 0.1874998)
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne2"]
+position = Vector2(-160, -12)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="FloorSegmentOne3" type="StaticBody2D" parent="World/Floor"]
+position = Vector2(960, 360)
+collision_mask = 0
+
+[node name="SegmentOne" type="Sprite2D" parent="World/Floor/FloorSegmentOne3"]
+position = Vector2(-160.00003, -12.000016)
+scale = Vector2(2.5, 0.1874998)
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShapeSegmentOne" type="CollisionShape2D" parent="World/Floor/FloorSegmentOne3"]
+position = Vector2(-160, -12)
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="ObstaclePool" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
+houses_scene = ExtResource("5_lquwl")
+
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="SpawnPosition" type="Marker2D" parent="."]
+position = Vector2(632, 336)
+
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_obstacle_spawn_timer_timeout"]
